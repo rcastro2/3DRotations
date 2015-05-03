@@ -14,8 +14,8 @@ namespace CSGame{
 		public bool pause = false;
 
 		//Formerly part of the Input Class
-		public string keyDown;
-		public string keyUp;
+		public string keyDown = "";
+		public string keyUp = "";
 		public int mouseX;
 		public int mouseY;
 		public bool leftButton;

@@ -12,13 +12,15 @@ namespace CSGame{
     int x, y;
     public int K;
     public bool displayPoints = true;
+    public string name;
 
-    public Shape(Setting game, int K, int[,] points, int[,]edges){
+    public Shape(Setting game, int K, int[,] points, int[,]edges, string name){
       this.game = game;
       this.p = generatePoint3D(points);
       r = new Point3D[p.Length];
       this.edges = edges;
       this.K = K;
+      this.name = name;
       for(int index = 0; index < p.Length; index++){
         r[index] = p[index];
       }
@@ -44,9 +46,7 @@ namespace CSGame{
           p[pos] = new Point(posx,posy);
           if(displayPoints) game.canvas.DrawString(""+ (char)(65+edges[index,pos]),game.form.Font,Brushes.Black,p[pos]);
         }
-
         game.canvas.DrawLine(new Pen(Color.Black),p[0],p[1]);
-
       }
 
     }
@@ -58,7 +58,6 @@ namespace CSGame{
             tmpy = -Math.Sin(Az) * p[index].X + Math.Cos(Az) * p[index].Y + 0 * p[index].Z;
             tmpz = 0 * p[index].X + 0 * p[index].Y + 1 * p[index].Z;
             r[index].X = tmpx; r[index].Y = tmpy; r[index].Z = tmpz;
-
         }
         for(int index = 0; index < r.Length; index++){
             tmpx = 1 * r[index].X + 0 * r[index].Y * 0 * r[index].Z;
