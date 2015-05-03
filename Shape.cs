@@ -4,37 +4,39 @@ using System.Drawing.Drawing2D;
 
 
 namespace CSGame{
-  class Diamond{
+  class Shape{
     // Modify Line 53 of Game.cs to match the class name above
     Setting game;
-    Point3D[] p = new Point3D[6];
-    Point3D[] r = new Point3D[6];
+    Point3D[] p,r;
+    int[,] edges;
     int x, y;
     public int K;
     public bool displayPoints = true;
-    int A=0,B=1,C=2,D=3,E=4,F=5;
 
-    public Diamond(Setting game, int K){
+    public Shape(Setting game, int K, int[,] points, int[,]edges){
       this.game = game;
-      p[A] = new Point3D(0,1,0);
-      p[B] = new Point3D(-1,0,1);
-      p[C] = new Point3D(1,0,1);
-      p[D] = new Point3D(1,0,-1);
-      p[E] = new Point3D(-1,0,-1);
-      p[F] = new Point3D(0,-1,0);
-
+      this.p = generatePoint3D(points);
+      r = new Point3D[p.Length];
+      this.edges = edges;
       this.K = K;
       for(int index = 0; index < p.Length; index++){
         r[index] = p[index];
       }
     }
-
+    private Point3D[] generatePoint3D(int[,] points){
+      int x,y,z;
+      Point3D[] p = new Point3D[points.GetLength(0)];
+      for(int index = 0; index < points.GetLength(0); index++){
+        x = points[index,0]; y = points[index,1]; z = points[index,2];
+        p[index] = new Point3D(x,y,z);
+      }
+      return p;
+    }
     public void Draw(){
       Point[] p = new Point[2];
       int posx,posy;
       x = game.mouseX;
       y = game.mouseY;
-      int[,] edges = new int[,] {{B,C},{C,D},{D,E},{E,B},{A,B},{A,C},{A,D},{A,E},{F,B},{F,C},{F,D},{F,E}};
       for(int index = 0; index < edges.GetLength(0); index++){
         for(int pos = 0; pos < 2; pos++){
           posx = (int)(K * r[edges[index,pos]].X)+x;

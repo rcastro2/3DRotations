@@ -11,7 +11,7 @@ namespace CSGame{
     Point3D[] r = new Point3D[7];
     int x, y;
     public int K;
-    public bool displayPoints = false;
+    public bool displayPoints = true;
     int A=0,B=1,C=2,D=3,E=4,F=5,G=6;//,H=7;
 
     public Spikes(Setting game, int K){

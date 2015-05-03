@@ -9,19 +9,35 @@ namespace CSGame{
     Diamond d;
     Cube c;
     Spikes s;
-    double A = Math.PI/90,Az,Ax,Ay;
+    Shape h;
+    double Da = Math.PI/90,Az,Ax,Ay;
     double Dz,Dx,Dy;
-    string shape = "Cube";
+    string shape = "Shape";
+    int A=0,B=1,C=2,D=3,E=4,F=5,G=6,H=7,I=8,J=9;
     public Template(Setting game){
       this.game = game;
       d = new Diamond(game,100);
       c = new Cube(game,100);
       s = new Spikes(game,100);
+      int[,] points = new int[,]{
+        {0,0,0},
+        {1,1,1},
+        {1,1,-1},
+        {-1,1,-1},
+        {-1,1,1},
+        {1,-1,1},
+        {1,-1,-1},
+        {-1,-1,-1},
+        {-1,-1,1}
+      };
+      int[,] edges = new int[,] {{B,C},{C,D},{D,E},{E,B},{A,B},{A,C},{A,D},{A,E},{F,G},{G,H},{H,I},{I,F},{A,F},{A,G},{A,H},{A,I}};
+      h = new Shape(game,50,points,edges);
     }
 
     public void update(){
       game.canvas.Clear(Color.White);
-      game.canvas.DrawString(game.keyDown,game.form.Font,Brushes.Black,5,5);
+      game.canvas.DrawString(game.keyDown,game.form.Font,Brushes.Black,5,20);
+      game.canvas.DrawString("Current Shape: " + shape,game.form.Font,Brushes.Black,5,5);
       switch(shape){
         case "Cube":
           c.Draw();
@@ -35,26 +51,30 @@ namespace CSGame{
           s.Draw();
           s.Rotate(Az,Ax,Ay);
           break;
+        case "Shape":
+          h.Draw();
+          h.Rotate(Az,Ax,Ay);
+          break;
       }
       Az += Dz; Ax += Dx; Ay += Dy;
       switch(game.keyDown){
         case "Left":
-          Dz = A;
+          Dz = Da;
           break;
         case "Right":
-          Dz = -A;
+          Dz = -Da;
           break;
         case "Up":
-          Dx = A;
+          Dx = Da;
           break;
         case "Down":
-          Dx = -A;
+          Dx = -Da;
           break;
         case "A":
-          Dy = A;
+          Dy = Da;
           break;
         case "D":
-          Dy = -A;
+          Dy = -Da;
           break;
         case "P":
         case "Oemplus":
@@ -72,6 +92,9 @@ namespace CSGame{
             break;
         case "D3":
             shape = "Spikes";
+            break;
+        case "D4":
+            shape = "Shape";
             break;
         case "Space":
           Az = Ay = Ax = 0;
