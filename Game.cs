@@ -21,6 +21,14 @@ namespace CSGame{
 		public bool leftButton;
 		public bool rightButton;
 	}
+	public struct Point3D{
+		public double X;
+		public double Y;
+		public double Z;
+		public Point3D(int X, int Y, int Z){
+			this.X = X; this.Y = Y; this.Z = Z;
+		}
+	}
 	public class Game : System.Windows.Forms.Form{
 
 		//bm is "Canvas" in memory where we can draw

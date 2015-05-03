@@ -6,46 +6,55 @@ namespace CSGame{
   class Template{
     // Modify Line 53 of Game.cs to match the class name above
     Setting game;
+    Diamond d;
     Cube c;
+    Spikes s;
     double A = Math.PI/90,Az,Ax,Ay;
-    double Dz = Math.PI/90,Dx = Math.PI/90,Dy=Math.PI/90;
+    double Dz,Dx,Dy;
+    string shape = "Cube";
     public Template(Setting game){
       this.game = game;
+      d = new Diamond(game,100);
       c = new Cube(game,100);
+      s = new Spikes(game,100);
     }
 
     public void update(){
       game.canvas.Clear(Color.White);
-      c.Draw();
-      c.Rotate(Az,Ax,Ay);
-      Az += Dz;
-      Ax += Dx;
-      Ay += Dy;
-      Console.WriteLine(game.keyDown);
+      game.canvas.DrawString(game.keyDown,game.form.Font,Brushes.Black,5,5);
+      switch(shape){
+        case "Cube":
+          c.Draw();
+          c.Rotate(Az,Ax,Ay);
+          break;
+        case "Diamond":
+          d.Draw();
+          d.Rotate(Az,Ax,Ay);
+          break;
+        case "Spikes":
+          s.Draw();
+          s.Rotate(Az,Ax,Ay);
+          break;
+      }
+      Az += Dz; Ax += Dx; Ay += Dy;
       switch(game.keyDown){
         case "Left":
-          //Az += A;
           Dz = A;
           break;
         case "Right":
-          //Az -= A
           Dz = -A;
           break;
         case "Up":
           Dx = A;
-          //Ax += A;
           break;
         case "Down":
           Dx = -A;
-          //Ax -= A;
           break;
         case "A":
           Dy = A;
-          //Ay += A;
           break;
         case "D":
           Dy = -A;
-          //Ay -= A;
           break;
         case "P":
         case "Oemplus":
@@ -54,6 +63,15 @@ namespace CSGame{
         case "M":
         case "OemMinus":
             c.K -= 1;
+            break;
+        case "D1":
+            shape = "Cube";
+            break;
+        case "D2":
+            shape = "Diamond";
+            break;
+        case "D3":
+            shape = "Spikes";
             break;
         case "Space":
           Az = Ay = Ax = 0;

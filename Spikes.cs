@@ -4,27 +4,26 @@ using System.Drawing.Drawing2D;
 
 
 namespace CSGame{
-  class Cube{
+  class Spikes{
     // Modify Line 53 of Game.cs to match the class name above
     Setting game;
-    Point3D[] p = new Point3D[8];
-    Point3D[] r = new Point3D[8];
+    Point3D[] p = new Point3D[7];
+    Point3D[] r = new Point3D[7];
     int x, y;
     public int K;
     public bool displayPoints = false;
-    int A=0,B=1,C=2,D=3,E=4,F=5,G=6,H=7;
+    int A=0,B=1,C=2,D=3,E=4,F=5,G=6;//,H=7;
 
-
-    public Cube(Setting game, int K){
+    public Spikes(Setting game, int K){
       this.game = game;
-      p[A] = new Point3D(-1,-1,-1);
-      p[B] = new Point3D(-1,-1,1);
-      p[C] = new Point3D(1,-1,1);
-      p[D] = new Point3D(1,-1,-1);
-      p[E] = new Point3D(-1,1,-1);
-      p[F] = new Point3D(-1,1,1);
-      p[G] = new Point3D(1,1,1);
-      p[H] = new Point3D(1,1,-1);
+      p[A] = new Point3D(0,0,0);
+      p[B] = new Point3D(-1,0,0);
+      p[C] = new Point3D(1,0,0);
+      p[D] = new Point3D(0,-1,0);
+      p[E] = new Point3D(0,1,0);
+      p[F] = new Point3D(0,0,-1);
+      p[G] = new Point3D(0,0,1);
+
       this.K = K;
       for(int index = 0; index < p.Length; index++){
         r[index] = p[index];
@@ -36,7 +35,7 @@ namespace CSGame{
       int posx,posy;
       x = game.mouseX;
       y = game.mouseY;
-      int[,] edges = new int[,] {{C,D},{D,H},{H,G},{G,C},{G,F},{F,B},{B,C},{B,A},{E,A},{A,D},{E,H},{F,E}};
+      int[,] edges = new int[,] {{A,B},{A,C},{A,D},{A,E},{A,F},{A,G}};
       for(int index = 0; index < edges.GetLength(0); index++){
         for(int pos = 0; pos < 2; pos++){
           posx = (int)(K * r[edges[index,pos]].X)+x;
@@ -80,5 +79,4 @@ namespace CSGame{
       }
     }
   }
-
 }
