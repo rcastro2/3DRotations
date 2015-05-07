@@ -57,11 +57,17 @@ namespace CSGame{
             shapes[currentShape].K -= 1;
           break;
         case "F1":
-          shapes[currentShape].displayPoints = false;
+          shapes[currentShape].displayLabels = false;
           break;
         case "F2":
-          shapes[currentShape].displayPoints = true;
+          shapes[currentShape].displayLabels = true;
           break;
+        case "F3":
+            shapes[currentShape].displayEdges = false;
+            break;
+        case "F4":
+            shapes[currentShape].displayEdges = true;
+            break;
         case "Space":
           Az = Ay = Ax = 0;
           shapes[currentShape].Reset();
@@ -274,11 +280,13 @@ namespace CSGame{
       game.canvas.DrawString("Rotate Y Axis: A and D Keys" + shapes[currentShape].name,game.form.Font,Brushes.Black,5,80);
       game.canvas.DrawString("_________________________",game.form.Font,Brushes.Black,5,95);
       game.canvas.DrawString("Scale Up or Down: + and - / P and M",game.form.Font,Brushes.Black,5,110);
-      game.canvas.DrawString("Points On or Off: F1 and F2",game.form.Font,Brushes.Black,5,125);
-      game.canvas.DrawString("_________________________",game.form.Font,Brushes.Black,5,140);
+      game.canvas.DrawString("Labels On or Off: F1 and F2",game.form.Font,Brushes.Black,5,125);
+      game.canvas.DrawString("Edges On or Off: F3 and F4",game.form.Font,Brushes.Black,5,140);
+      game.canvas.DrawString("_________________________",game.form.Font,Brushes.Black,5,155);
       for(int pos = 0; pos < shapes.Length; pos++)
-        game.canvas.DrawString("Shapes " + (pos + 1) + ": " + shapes[pos].name,game.form.Font,Brushes.Black,5,155 + pos * 15);
-      game.canvas.DrawString("Reset Points: Space", game.form.Font,Brushes.Black,5,170 + shapes.Length * 15);
+        game.canvas.DrawString("Shapes " + (pos + 1) + ": " + shapes[pos].name,game.form.Font,Brushes.Black,5,170 + pos * 15);
+      game.canvas.DrawString("_________________________",game.form.Font,Brushes.Black,5,170 + shapes.Length * 15);
+      game.canvas.DrawString("Reset Points: Space", game.form.Font,Brushes.Black,5,185 + shapes.Length * 15);
 
 
     }

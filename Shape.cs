@@ -11,7 +11,8 @@ namespace CSGame{
     int[,] edges;
     int x, y;
     public double K;
-    public bool displayPoints = true;
+    public bool displayLabels = true;
+    public bool displayEdges = true;
     public string name;
 
     public Shape(Setting game, int K, int[,] points, int[,]edges, string name){
@@ -39,15 +40,18 @@ namespace CSGame{
       int posx,posy;
       x = game.mouseX;
       y = game.mouseY;
-      for(int index = 0; index < edges.GetLength(0); index++){
+      for(int index = 0; index < ((displayEdges)?edges.GetLength(0):r.Length); index++){
         for(int pos = 0; pos < 2; pos++){
-          posx = (int)(K * r[edges[index,pos]].X)+x;
-          posy = (int)(K * r[edges[index,pos]].Y)+y;
+          posx = (int)(K * ((displayEdges)?r[edges[index,pos]].X:r[index].X))+x;
+          posy = (int)(K * ((displayEdges)?r[edges[index,pos]].Y:r[index].Y))+y;
           p[pos] = new Point(posx,posy);
           //if(displayPoints) game.canvas.DrawString(""+ (char)(65+edges[index,pos]),game.form.Font,Brushes.Black,p[pos]);
-          if(displayPoints) game.canvas.DrawString(""+ edges[index,pos],game.form.Font,Brushes.Black,p[pos]);
+          if(displayLabels) game.canvas.DrawString(""+ ((displayEdges)?edges[index,pos]:index),game.form.Font,Brushes.Black,p[pos]);
         }
-        game.canvas.DrawLine(new Pen(Color.Black),p[0],p[1]);
+        if(displayEdges)
+          game.canvas.DrawLine(new Pen(Color.Black),p[0],p[1]);
+        else
+          game.canvas.FillEllipse(new SolidBrush(Color.Black),p[0].X, p[0].Y,4,4);
       }
 
     }
