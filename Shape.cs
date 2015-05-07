@@ -10,7 +10,7 @@ namespace CSGame{
     Point3D[] p,r;
     int[,] edges;
     int x, y;
-    public int K;
+    public double K;
     public bool displayPoints = true;
     public string name;
 
@@ -44,7 +44,8 @@ namespace CSGame{
           posx = (int)(K * r[edges[index,pos]].X)+x;
           posy = (int)(K * r[edges[index,pos]].Y)+y;
           p[pos] = new Point(posx,posy);
-          if(displayPoints) game.canvas.DrawString(""+ (char)(65+edges[index,pos]),game.form.Font,Brushes.Black,p[pos]);
+          //if(displayPoints) game.canvas.DrawString(""+ (char)(65+edges[index,pos]),game.form.Font,Brushes.Black,p[pos]);
+          if(displayPoints) game.canvas.DrawString(""+ edges[index,pos],game.form.Font,Brushes.Black,p[pos]);
         }
         game.canvas.DrawLine(new Pen(Color.Black),p[0],p[1]);
       }
